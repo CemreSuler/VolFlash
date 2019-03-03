@@ -1,15 +1,14 @@
-THEOS_DEVICE_IP = 192.168.1.34
 include $(THEOS)/makefiles/common.mk
-PACKAGE_VERSION=1.3
-TWEAK_NAME = VolFlash
-VolFlash_FILES = Tweak.xm
-VolFlash_EXTRA_FRAMEWORKS += Cephei
-VolFlash_FRAMEWORKS = IOKit
 
-include $(THEOS_MAKE_PATH)/tweak.mk
+BUNDLE_NAME = VolFlash
+VolFlash_FILES = VFLRootListController.m
+VolFlash_INSTALL_PATH = /Library/PreferenceBundles
+VolFlash_FRAMEWORKS = UIKit
+VolFlash_PRIVATE_FRAMEWORKS = Preferences
+VolFlash_EXTRA_FRAMEWORKS = Cephei CepheiPrefs
 
-after-install::
-	install.exec "killall -9 SpringBoard"
+include $(THEOS_MAKE_PATH)/bundle.mk
 
-SUBPROJECTS += volflash
-include $(THEOS_MAKE_PATH)/aggregate.mk
+internal-stage::
+	$(ECHO_NOTHING)mkdir -p $(THEOS_STAGING_DIR)/Library/PreferenceLoader/Preferences$(ECHO_END)
+	$(ECHO_NOTHING)cp entry.plist $(THEOS_STAGING_DIR)/Library/PreferenceLoader/Preferences/VolFlash.plist$(ECHO_END)
