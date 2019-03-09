@@ -1,9 +1,9 @@
 Package: com.chmbr.volflash
 Name: VolFlash
 Depends: mobilesubstrate, ws.hbang.common (>= 1.11)
-Version: 1.4.1
+Version: 1.5.0
 Architecture: iphoneos-arm
-Description: An awesome MobileSubstrate tweak!
+Description: 
 Maintainer: Cemre Süler
 Author: Cemre Süler
 Section: Tweaks

@@ -35,10 +35,11 @@
 -(void)donation:(id)arg1 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://paypal.me/CemreSuler"]];
 }
-- (void)respring:(id)sender {
-    NSTask *t = [[[NSTask alloc] init] autorelease];
-    [t setLaunchPath:@"/usr/bin/killall"];
-    [t setArguments:[NSArray arrayWithObjects:@"backboardd", nil]];
-    [t launch];
+-(void)respring{
+    pid_t respringID;
+    char *argv[] = {"/usr/bin/killall", "backboardd", NULL};
+    posix_spawn(&respringID, argv[0], NULL, NULL, argv, NULL);
+    waitpid(respringID, NULL, WEXITED);
 }
+
 @end
